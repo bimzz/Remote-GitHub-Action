@@ -1,0 +1,89 @@
+name: Windows Server 2019
+on: 
+  workflow_dispatch:
+    inputs:
+      code:
+        description: 'Chrome Remote Desktop Code | Windows (PowerShell)'
+        required: true
+      pin:
+        description: 'PIN (6 Digits)'
+        required: true
+      time:
+        description: 'VM Time (Seconds, Maximum 72 hours)'
+        required: true
+        default: "21600"
+jobs:
+  build:
+    runs-on: windows-2019
+    steps:
+    - name: Doanload & Install
+      run: | 
+        Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
+        echo "Download & Install: Chrome"
+        & {$P = $env:TEMP + '\chrome_installer.exe'; Invoke-WebRequest 'https://dl.google.com/chrome/install/latest/chrome_installer.exe' -OutFile $P; Start-Process -FilePath $P -Args '/install' -Verb RunAs -Wait; Remove-Item $P}
+        echo "Download & Install: Chrome Remote Desktop"
+        & {$P = $env:TEMP + '\chromeremotedesktophost.msi'; Invoke-WebRequest 'https://dl.google.com/edgedl/chrome-remote-desktop/chromeremotedesktophost.msi' -OutFile $P; Start-Process $P -Wait; Remove-Item $P}
+    - name: Start Chrome Remote Desktop
+      run: ${{ github.event.inputs.code }} -pin=${{ github.event.inputs.pin }}
+    - name: Done! You can see the machine in list now.
+      run: echo "OK"
+    - name: For keep VM alive (1)
+      run: | 
+        $vmtime = ${{ github.event.inputs.time }} / 12
+        Start-Sleep -Seconds $vmtime
+        echo "OK"
+    - name: For keep VM alive (2)
+      run: | 
+        $vmtime = ${{ github.event.inputs.time }} / 12
+        Start-Sleep -Seconds $vmtime
+        echo "OK"
+    - name: For keep VM alive (3)
+      run: | 
+        $vmtime = ${{ github.event.inputs.time }} / 12
+        Start-Sleep -Seconds $vmtime
+        echo "OK"
+    - name: For keep VM alive (4)
+      run: | 
+        $vmtime = ${{ github.event.inputs.time }} / 12
+        Start-Sleep -Seconds $vmtime
+        echo "OK"
+    - name: For keep VM alive (5)
+      run: | 
+        $vmtime = ${{ github.event.inputs.time }} / 12
+        Start-Sleep -Seconds $vmtime
+        echo "OK"
+    - name: For keep VM alive (6)
+      run: | 
+        $vmtime = ${{ github.event.inputs.time }} / 12
+        Start-Sleep -Seconds $vmtime
+        echo "OK"
+    - name: For keep VM alive (7)
+      run: | 
+        $vmtime = ${{ github.event.inputs.time }} / 12
+        Start-Sleep -Seconds $vmtime
+        echo "OK"
+    - name: For keep VM alive (8)
+      run: | 
+        $vmtime = ${{ github.event.inputs.time }} / 12
+        Start-Sleep -Seconds $vmtime
+        echo "OK"
+    - name: For keep VM alive (9)
+      run: | 
+        $vmtime = ${{ github.event.inputs.time }} / 12
+        Start-Sleep -Seconds $vmtime
+        echo "OK"
+    - name: For keep VM alive (10)
+      run: | 
+        $vmtime = ${{ github.event.inputs.time }} / 12
+        Start-Sleep -Seconds $vmtime
+        echo "OK"
+    - name: For keep VM alive (11)
+      run: | 
+        $vmtime = ${{ github.event.inputs.time }} / 12
+        Start-Sleep -Seconds $vmtime
+        echo "OK"
+    - name: For keep VM alive (12)
+      run: | 
+        $vmtime = ${{ github.event.inputs.time }} / 12
+        Start-Sleep -Seconds $vmtime
+        echo "OK"
