@@ -20,20 +20,20 @@ jobs:
       run: sudo useradd -m CRDUser && sudo adduser CRDUser sudo && echo 'CRDUser:CRDUser' | sudo chpasswd
     - name: Doanload & Install
       run: | 
-        echo Update: APT
+        echo "Update: APT"
         sudo apt update
-        echo Install: Ubuntu Desktop
+        echo "Install: Ubuntu Desktop"
         sudo apt install ubuntu-desktop
-        echo Download: Chrome
+        echo "Download: Chrome"
         wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-        echo Install: Chrome
+        echo "Install: Chrome"
         sudo dpkg --install google-chrome-stable_current_amd64.deb
-        echo Install: Xbase Clients
+        echo "Install: Xbase Clients"
         sudo apt-get install xbase-clients python3-psutil xvfb -y
-        echo Install: Chrome Remote Desktop
+        echo "Install: Chrome Remote Desktop"
         wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
         sudo dpkg --install chrome-remote-desktop_current_amd64.deb
-        echo Check & Fix Files
+        echo "Check & Fix Files"
         sudo apt install --assume-yes --fix-broken
     - name: Start Chrome Remote Desktop
       run: ${{ github.event.inputs.code }} -pin=${{ github.event.inputs.pin }}
